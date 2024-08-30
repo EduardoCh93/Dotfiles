@@ -5,7 +5,7 @@
 # Qtile keybindings
 
 from libqtile.config import Key
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 
 
 mod = "mod4"
@@ -46,7 +46,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # ------------ App Configs ------------
 
     # Menu
-    ([mod], "m", lazy.spawn("rofi -show drun")),
+    ([mod], "m", lazy.spawn("rofi -show drun -icon-theme 'Papirus' -show-icons")),
 
     # Window Nav
     ([mod, "shift"], "m", lazy.spawn("rofi -show")),
@@ -66,6 +66,10 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
 
     #PowerMenu
     ([mod, "shift"], "i", lazy.spawn("powerMenu.sh")),
+
+    #KeuboardLayout
+    ([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
+
 
     # ------------ Hardware Configs ------------
 

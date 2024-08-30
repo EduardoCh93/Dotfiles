@@ -1,0 +1,3 @@
+```
+paru -S qtile-extras
+```

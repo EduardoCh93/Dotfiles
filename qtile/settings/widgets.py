@@ -1,6 +1,6 @@
 from libqtile import widget
 from .theme import colors
-
+from qtile_extras import widget as widget_extras
 # Get the icons at https://www.nerdfonts.com/cheat-sheet (you need a Nerd Font)
 
 fuente = 'VictorMono'
@@ -31,9 +31,9 @@ def powerline(color1, color2):
         background = color2,
         foreground = color1,
         font = fuenteWidget,
-        text="", # Icon: nf-oct-triangle_left
-        fontsize=43,
-        padding=-6,
+        text= "", #"", # Icon: nf-oct-triangle_left
+        fontsize=30,
+        padding=18,
     )
 
 
@@ -73,19 +73,19 @@ primary_widgets = [
         display_format='{updates}',
         update_interval=1800,
         custom_command='checkupdates',
-        padding = 10,
+        padding = 3,
     ),
 
-    #Wifi
+    #Wifialsa_output.usb-MosArt_MosArt_USB_Audio_Device-00.analog-stereo
     powerline(colors['color3'],colors['color4']),
     icon(bg=colors['color3'], text=' '),  # Icon: nf-fa-feed
     widget.Net(
-        interface='wlp1s0',
+        interface='wlan0',
         background=colors['color3'], 
         foreground='#000000',
-        format='{up} - {down}', #  nf-cod-arrow_up,  nf-cod-arrow_down
+        format='  {up:.0f}{up_suffix} -  {down:.0f} {down_suffix}', #  nf-cod-arrow_up,  nf-cod-arrow_down
         use_bits='true',
-        padding = 10,
+        padding = 5,
     ),
     
     # Ventanas
@@ -93,31 +93,41 @@ primary_widgets = [
     widget.CurrentLayoutIcon(
         background = colors['color2'],
         scale = 0.5,
-        padding = 2,
+        padding = 5,
     ),
     widget.CurrentLayout(
         background=colors['color2'], 
         foreground = '#000000',
-        padding = 10,
+        padding = 5,
     ),
     # Fecha
     powerline(colors['color1'], colors['color2']),
-    icon(bg=colors['color1'], fontsize=20, text=''), # Icon: nf-mdi-calendar_clock
+    icon(bg=colors['color1'], fontsize=20, text='󰃰 '), # Icon: nf-mdi-calendar_clock
     widget.Clock(
         background = colors['color1'],
         foreground ='#000000',
-        format ='%d/%m/%Y %A %H:%M ',
-        padding = 10,
+        format =' %d/%m/%Y %A %H:%M ',
+        padding = 2,
     ),
     #Volume
     powerline(colors['color0'], colors['color1']),
     widget.Volume(
         background = colors['color0'],
         foreground = '#000000',
-        check_mute_string = '[ﱝ]',
+        device = 'default',
+        channel = 'PCM',
+        mute_format = '󰝟 Off',
         limit_max_volume = True,
-        fmt = 'Vol: {}'
+        fmt = 'Vol: {} '
     ),
+    #KeyboardLayout
+    icon(bg=colors['color0'], fontsize=20, text='󰌌 '),
+    widget.KeyboardLayout(
+        background = colors['color0'],
+        foreground = '#000000',
+        configured_keyboards=['us', 'es'],
+    ),
+
     widget.Systray(
         background=colors['color0'],
         padding=5),
@@ -127,12 +137,12 @@ primary_widgets = [
 secondary_widgets = [
     *workspaces(),
     separator(),
-    # powerline('color1', 'dark'),
-    # widget.CurrentLayoutIcon(**base(bg='color1'), scale=0.65),
-    # widget.CurrentLayout(**base(bg='color1'), padding=5),
-    # powerline('color2', 'color1'),
-    # widget.Clock(**base(bg='color2'), format='%d/%m/%Y - %H:%M '),
-    # powerline('dark', 'color2'),
+    powerline('color1', 'dark'),
+    widget.CurrentLayoutIcon(bg='color1', scale=0.65),
+    widget.CurrentLayout(bg='color1', padding=5),
+    powerline('color2', 'color1'),
+    widget.Clock(bg='color2', format='%d/%m/%Y - %H:%M '),
+    powerline('dark', 'color2'),
 ]
 
 widget_defaults = {
