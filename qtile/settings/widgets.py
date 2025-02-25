@@ -83,7 +83,7 @@ primary_widgets = [
         interface='wlan0',
         background=colors['color3'], 
         foreground='#000000',
-        format='  {up:.0f}{up_suffix} -  {down:.0f} {down_suffix}', #  nf-cod-arrow_up,  nf-cod-arrow_down
+        format='{interface}:   {up:.0f}{up_suffix} -  {down:.0f} {down_suffix}', #  nf-cod-arrow_up,  nf-cod-arrow_down
         use_bits='true',
         padding = 5,
     ),
